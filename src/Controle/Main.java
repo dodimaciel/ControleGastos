@@ -85,24 +85,6 @@ public class Main {
                         String usuario;
                         String empreza;
 
-                        System.out.println(" --- MENU GASTOS --- ");
-
-                        users.listar();
-
-                        System.out.println("Digite o Usuario: ");
-                        usuario = tc.next();
-
-                        if (users.nomeusuario.equals(usuario)) {
-
-                            empres.listar();
-                            System.out.println("Digite o nome da Empresa: ");
-                            empreza = tc.next();
-
-                            if (empres.nomeempresa.equals(empreza)) {
-                                gastos.ler();
-                                gastos.inserir();
-                            }
-                        }
                 }
             } while (opintermed != 5);
         } while (opmaster != 4);
