@@ -32,7 +32,7 @@ public class Usuario {
     public void exibir() {
         System.out.println("Nome: " +this.nomeusuario);
         System.out.println("Endereço: " +this.enderecousuario);
-        System.out.println("Contato: " +this.contatousuario);
+        System.out.println("Contato: " +this.contatousuario + "\n");
     }
 
     public void inserir() {
@@ -129,7 +129,7 @@ public class Usuario {
             System.out.print("Digite o id do Usuario para efetuar a Exclusão:  ");
             iduser = l.next();
 
-            String sql = "DELETE FROM cliente where idusuario = '" + iduser + "'";
+            String sql = "DELETE FROM usuario where idusuario = '" + iduser + "'";
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
