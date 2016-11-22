@@ -30,9 +30,9 @@ public class Usuario {
     }
 
     public void exibir() {
-        System.out.println("Nome: " +this.nomeusuario);
-        System.out.println("Endereço: " +this.enderecousuario);
-        System.out.println("Contato: " +this.contatousuario + "\n");
+        System.out.println("Nome: " + this.nomeusuario);
+        System.out.println("Endereço: " + this.enderecousuario);
+        System.out.println("Contato: " + this.contatousuario + "\n");
     }
 
     public void inserir() {
@@ -82,6 +82,7 @@ public class Usuario {
             e.printStackTrace();
         }
     }
+
     public void update() {
         try {
             Scanner l = new Scanner(System.in);
@@ -104,7 +105,7 @@ public class Usuario {
             novoendereco = l.next();
 
             String sql = "UPDATE usuario SET nomeusuario = '" + novonome + "',  enderecousuario = '" + novoendereco + "'," +
-                    "  contatousuario = '" + novocontato + "' WHERE idusuario = " + ide +";";
+                    "  contatousuario = '" + novocontato + "' WHERE idusuario = " + ide + ";";
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
@@ -144,5 +145,6 @@ public class Usuario {
             e.printStackTrace();
         }
     }
+
 
 }

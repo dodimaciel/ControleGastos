@@ -10,12 +10,18 @@ import java.util.Scanner;
  * Created by Douglas on 16/11/2016.
  */
 public class Gastos {
+    public int iduser;
+    public int idemp;
     public String nome;
     public double valor;
 
     public void ler() {
         Scanner l = new Scanner(System.in);
 
+        System.out.println("Digite o ID do Usuario: ");
+        iduser = l.nextInt();
+        System.out.println("Digite o ID da empresa: ");
+        idemp = l.nextInt();
         System.out.println("Digite o nome do Gasto: ");
         nome = l.next();
         System.out.println("Digite o valor do Gasto: ");
@@ -23,6 +29,8 @@ public class Gastos {
     }
 
     public void exibir() {
+        System.out.println("ID Usuario: " +iduser);
+        System.out.println("ID Empresa: " +idemp);
         System.out.println("Nome Gasto: " + nome);
         System.out.println("Valor Gasto: " + valor);
     }
@@ -32,8 +40,8 @@ public class Gastos {
             System.out.println("Abrindo Conexão...");
             Connection conexao = ConnectionFactory.createConnection();
 
-            String sql = "INSERT INTO gastos(nome, valor)" +
-                    "VALUES ('" + this.nome + "', '" + this.valor + "')";
+            String sql = "INSERT INTO gastos(iduser, idemp, nome, valor)" +
+                    "VALUES ('" + this.iduser + "', '" + this.idemp+ "', '" + this.nome + "', '" + this.valor + "')";
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
@@ -46,4 +54,6 @@ public class Gastos {
             e.printStackTrace();
         }
     }
+
+
 }
