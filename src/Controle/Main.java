@@ -1,20 +1,21 @@
 package Controle;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
  * Created by Douglas on 16/11/2016.
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         int opmaster = 0;
         int opintermed = 0;
-
+        Gastos gastos = new Gastos();
         Usuario user = new Usuario();
         Empresa empresa1 = new Empresa();
 
-        Scanner tc = new Scanner(System.in);
         do {
+            Scanner tc = new Scanner(System.in);
             System.out.println(" ------------------------------------- ");
             System.out.println(" ---- MENU PRINCIPAL ---- ");
             System.out.println(" ---- 1 MENU USUARIO ---- ");
@@ -24,7 +25,7 @@ public class Main {
             System.out.println(" ------------------------------------- ");
             opmaster = tc.nextInt();
 
-            do switch (opmaster) {
+            switch (opmaster) {
                 case 1:
                     System.out.println(" ** 1 - Adicionar Usuario ** ");
                     System.out.println(" ** 2 - Remover Usuario ** ");
@@ -52,7 +53,9 @@ public class Main {
                     }
                     break;
 
-                case 2:
+
+                case 2: {
+
                     int emp = 0;
                     Empresa empresa = new Empresa();
                     System.out.println(" ** 1 - Adicionar Empresa ** ");
@@ -61,7 +64,6 @@ public class Main {
                     System.out.println(" ** 4 - Listar Empresa ** ");
                     System.out.println(" ** 5 - Voltar para o meu principal ** ");
                     emp = tc.nextInt();
-
                     switch (emp) {
                         case 1:
                             empresa.ler();
@@ -76,33 +78,52 @@ public class Main {
                         case 4:
                             empresa.listar();
                             break;
-                        default:
+                        case 5:
+                            break;
                     }
-                    break;
+                }
 
                 case 3:
+                    int op = 0;
                     Scanner l = new Scanner(System.in);
 
-                    Gastos gastos = new Gastos();
+                    System.out.println(" ** 1 - Adicionar Gasto ** ");
+                    System.out.println(" ** 2 - Exibir Gasto ** ");
+                    System.out.println(" ** 3 - Remover Gasto por ID");
+                    System.out.println(" ** 4 - Voltar para o meu principal ** ");
+                    op = l.nextInt();
 
-                    int usuarioid;
-                    int empresaid;
+                    switch (op) {
+                        case 1:
 
-                    System.out.println("\n - - - - - - - - - - - - - - - - - - - - - - ");
-                    System.out.println("ESCOLHENDO UM USUARIO PARA INSERIR NO BANCO!");
-                    user.exibir();
-                    System.out.println("ESCOLHENDO UMA EMPRESA PARA INSERIR NO BANCO!");
-                    empresa1.exibir();
-                    System.out.println("\n - - - - - - - - - - - - - - - - - - - - - - ");
+                            String iduser;
+                            String idemp;
 
-                    System.out.println("Digite o ID do Usuario: ");
-                    usuarioid = l.nextInt();
-
-                    System.out.println("Digite o ID da Empresa: ");
-                    empresaid = l.nextInt();
+                            System.out.println("\n - - - - - - - - USUARIO - - - - - - - - ");
+                            user.pesquisa();
+                            System.out.println("\n - - - - - - - - EMPRESA - - - - - - - - ");
+                            empresa1.pesquisa();
+                            System.out.println("\n - - - - - - - - - - - - - - - - - - - - - - ");
 
 
-            } while (opintermed != 5);
-        } while (opmaster != 4);
+                            System.out.println("Digite o ID do Usuario: ");
+                            iduser = l.next();
+                            System.out.println("Digite o ID da Empresa");
+                            idemp = l.next();
+
+                            gastos.ler();
+                            gastos.inserir(iduser, idemp);
+                            break;
+                        case 2:
+                            gastos.pesquisaGastos();
+                            break;
+                        case 3:
+                            gastos.pesquisaGastos();
+                            gastos.remover();
+                            break;
+                    }
+            }
+
+        } while (opmaster != 5) ;
     }
 }

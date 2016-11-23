@@ -2,9 +2,7 @@ package Controle;
 
 import Banco.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.Scanner;
 
 /**
@@ -39,7 +37,6 @@ public class Usuario {
         try {
             System.out.println("Abrindo Conexão...");
             Connection conexao = ConnectionFactory.createConnection();
-
             String sql = "INSERT INTO usuario(idusuario, nomeusuario, enderecousuario, contatousuario)" +
                     "VALUES ('" + this.idusuario + "', '" + this.nomeusuario + "', '" + this.enderecousuario + "', '" + this.contatousuario + "')";
 
@@ -146,5 +143,22 @@ public class Usuario {
         }
     }
 
+    public void pesquisa() throws SQLException {
+        Connection conexao = ConnectionFactory.createConnection();
+        String sql = "SELECT * FROM usuario";
 
+        PreparedStatement comando = conexao.prepareStatement(sql);
+
+        ResultSet result = comando.executeQuery(sql);
+
+        while (result.next()) {
+
+            Usuario user = new Usuario();
+
+            System.out.println("ID = " + result.getInt(1));
+            System.out.println("NOME = " + result.getString(2));
+            System.out.println("ENDEREÇO = " + result.getString(4));
+            System.out.println("CONTATO = " + result.getString(5));
+        }
+    }
 }

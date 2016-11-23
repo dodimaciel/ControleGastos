@@ -4,24 +4,20 @@ import Banco.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
  * Created by Douglas on 16/11/2016.
  */
 public class Gastos {
-    public int iduser;
-    public int idemp;
     public String nome;
     public double valor;
 
     public void ler() {
         Scanner l = new Scanner(System.in);
 
-        System.out.println("Digite o ID do Usuario: ");
-        iduser = l.nextInt();
-        System.out.println("Digite o ID da empresa: ");
-        idemp = l.nextInt();
         System.out.println("Digite o nome do Gasto: ");
         nome = l.next();
         System.out.println("Digite o valor do Gasto: ");
@@ -29,20 +25,16 @@ public class Gastos {
     }
 
     public void exibir() {
-        System.out.println("ID Usuario: " +iduser);
-        System.out.println("ID Empresa: " +idemp);
         System.out.println("Nome Gasto: " + nome);
         System.out.println("Valor Gasto: " + valor);
     }
 
-    public void inserir() {
+    public void inserir(String idusuario, String idempresa) {
         try {
             System.out.println("Abrindo Conexão...");
             Connection conexao = ConnectionFactory.createConnection();
-
-            String sql = "INSERT INTO gastos(iduser, idemp, nome, valor)" +
-                    "VALUES ('" + this.iduser + "', '" + this.idemp+ "', '" + this.nome + "', '" + this.valor + "')";
-
+            String sql = "INSERT INTO gastos(iduser, idempresa, nome, valor)" +
+                    "VALUES ('" + idusuario + "', '" + idempresa + "', '" + this.nome + "', '" + this.valor + "')";
             PreparedStatement comando = conexao.prepareStatement(sql);
 
             //System.out.println("Executando comando...");
@@ -50,6 +42,52 @@ public class Gastos {
             //System.out.println("Fechando conexão...");
             conexao.close();
             System.out.println("\nINSERIDO COM SUCESSO!!\n");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void pesquisaGastos() throws SQLException {
+        Connection conexao = ConnectionFactory.createConnection();
+        String sql = "SELECT * FROM gastos";
+
+        PreparedStatement comando = conexao.prepareStatement(sql);
+
+        ResultSet result = comando.executeQuery(sql);
+
+        while (result.next()) {
+
+            Gastos gastos = new Gastos();
+
+            System.out.println(" -------------------------------- ");
+            System.out.println("ID GASTO= " + result.getInt(1));
+            System.out.println("ID USUARIO = " + result.getInt(2));
+            System.out.println("ID EMPRESA = " + result.getInt(5));
+            System.out.println("NOME GASTO = " + result.getString(3));
+            System.out.println("VALOR GASTO = " +result.getDouble(4));
+            System.out.println(" -------------------------------- ");
+        }
+    }
+
+    public void remover () throws SQLException {
+        try {
+            Scanner tc = new Scanner(System.in);
+            Connection conexao = ConnectionFactory.createConnection();
+            System.out.println("Abrindo Conexão... ");
+            String removeGasto;
+
+            System.out.print("Digite o id dos Gastos para efetuar a Exclusão:  ");
+            removeGasto = tc.next();
+
+            String sql = "DELETE FROM gastos where idgasto = '" + removeGasto + "'";
+
+            PreparedStatement comando = conexao.prepareStatement(sql);
+
+            comando.execute();
+            conexao.close();
+
+            System.out.println("\nDELETADO COM SUCESSO\n");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

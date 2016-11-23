@@ -5,6 +5,7 @@ import Banco.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -144,6 +145,25 @@ public class Empresa {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void pesquisa() throws SQLException {
+        Connection conexao = ConnectionFactory.createConnection();
+        String sql = "SELECT * FROM empresa";
+
+        PreparedStatement comando = conexao.prepareStatement(sql);
+
+        ResultSet result = comando.executeQuery(sql);
+
+        while (result.next()) {
+
+            Empresa user = new Empresa();
+
+            System.out.println("ID = " + result.getInt(1));
+            System.out.println("NOME = " + result.getString(2));
+            System.out.println("ENDEREÇO = " + result.getString(3));
+            System.out.println("CONTATO = " + result.getString(4));
         }
     }
 
