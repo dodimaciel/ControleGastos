@@ -128,9 +128,12 @@ public class Empresa {
             System.out.println("Abrindo Conexão... ");
             String idemp;
 
+            System.out.println(" -------------------------------------------- ");
             listar();
+            System.out.println(" -------------------------------------------- ");
             System.out.print("Digite o id da Empresa para efetuar a Exclusão:  ");
             idemp = l.next();
+            System.out.println(" -------------------------------------------- ");
 
             String sql = "DELETE FROM empresa where idempresa = '" + idemp + "'";
 

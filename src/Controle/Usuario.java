@@ -131,9 +131,7 @@ public class Usuario {
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
-            //System.out.println("Executando comando...");
             comando.execute();
-            //System.out.println("\nFechando Conexão...");
             conexao.close();
 
             System.out.println("\nDELETADO COM SUCESSO\n");

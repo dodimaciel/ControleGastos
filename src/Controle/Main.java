@@ -17,13 +17,16 @@ public class Main {
         do {
             Scanner tc = new Scanner(System.in);
             System.out.println(" ------------------------------------- ");
+            System.out.println("     **** CONTROLE DE GASTOS ***       ");
+            System.out.println(" ------------------------------------- ");
             System.out.println(" ---- MENU PRINCIPAL ---- ");
             System.out.println(" ---- 1 MENU USUARIO ---- ");
             System.out.println(" ---  2 MENU EMPRESA ---- ");
             System.out.println(" ---  3 MENU GASTOS  ----");
-            System.out.println(" ---  4 FINALIZAR PROGRAMA ---- ");
+            System.out.println(" ---  0 FINALIZAR PROGRAMA ---- ");
             System.out.println(" ------------------------------------- ");
             opmaster = tc.nextInt();
+
 
             switch (opmaster) {
                 case 1:
@@ -53,7 +56,6 @@ public class Main {
                     }
                     break;
 
-
                 case 2: {
 
                     int emp = 0;
@@ -80,10 +82,13 @@ public class Main {
                             break;
                         case 5:
                             break;
+                        default:
+                            break;
                     }
+                    break;
                 }
 
-                case 3:
+                case 3: {
                     int op = 0;
                     Scanner l = new Scanner(System.in);
 
@@ -121,9 +126,22 @@ public class Main {
                             gastos.pesquisaGastos();
                             gastos.remover();
                             break;
+                        case 4:
+                            break;
+                        default:
+                            break;
                     }
+                    break;
+                }
+
+                case 4: {
+                    System.out.println("FINALIZADO");
+                    break;
+                }
+                default:
+                    break;
             }
 
-        } while (opmaster != 5) ;
+        } while (opmaster != 0);
     }
 }
