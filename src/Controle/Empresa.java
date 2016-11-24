@@ -144,7 +144,7 @@ public class Empresa {
             //System.out.println("\nFechando Conexão...");
             conexao.close();
 
-            System.out.println("\nDELETADO COM SUCESSO\n");
+            System.out.println("\nDELETADO COM SUCESSO!\n");
 
         } catch (Exception e) {
             e.printStackTrace();
