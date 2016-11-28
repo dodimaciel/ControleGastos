@@ -33,8 +33,9 @@ public class Gastos {
         try {
             System.out.println("Abrindo Conexão...");
             Connection conexao = ConnectionFactory.createConnection();
-            String sql = "INSERT INTO gastos(iduser, idempresa, nome, valor)" +
-                    "VALUES ('" + idusuario + "', '" + idempresa + "', '" + this.nome + "', '" + this.valor + "')";
+            String sql = "INSERT INTO gastos(idusuario, idempresa, nome, valor) " +
+                    "VALUES (" + idusuario + ", " + idempresa + ", '" + this.nome + "', " + this.valor + ")";
+            System.out.println(sql);
             PreparedStatement comando = conexao.prepareStatement(sql);
 
             //System.out.println("Executando comando...");
@@ -47,27 +48,6 @@ public class Gastos {
         }
     }
 
-    public void pesquisaGastos() throws SQLException {
-        Connection conexao = ConnectionFactory.createConnection();
-        String sql = "SELECT * FROM gastos";
-
-        PreparedStatement comando = conexao.prepareStatement(sql);
-
-        ResultSet result = comando.executeQuery(sql);
-
-        while (result.next()) {
-
-            Gastos gastos = new Gastos();
-
-            System.out.println(" -------------------------------- ");
-            System.out.println("ID GASTO= " + result.getInt(1));
-            System.out.println("ID USUARIO = " + result.getInt(2));
-            System.out.println("ID EMPRESA = " + result.getInt(5));
-            System.out.println("NOME GASTO = " + result.getString(3));
-            System.out.println("VALOR GASTO = " +result.getDouble(4));
-            System.out.println(" -------------------------------- ");
-        }
-    }
 
     public void remover () throws SQLException {
         try {
@@ -94,4 +74,23 @@ public class Gastos {
     }
 
 
+    public void pesquisaGastos() throws SQLException {
+        Connection conexao = ConnectionFactory.createConnection();
+        String sql = "SELECT * FROM gastos";
+        PreparedStatement comando = conexao.prepareStatement(sql);
+
+        ResultSet result = comando.executeQuery(sql);
+
+        while (result.next()) {
+
+            Gastos gastos = new Gastos();
+
+            System.out.println(" ---------RESULTADO------------- ");
+            System.out.println("ID GASTO = " + result.getInt(1));
+            System.out.println("ID USUARIO = " + result.getInt(4));
+            System.out.println("NOME GASTO = " + result.getString(2));
+            System.out.println("VALOR GASTO = " + result.getInt(3));
+            System.out.println(" -------------------------------- ");
+        }
+    }
 }
