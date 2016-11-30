@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,6 +15,7 @@ import java.util.Scanner;
 public class Gastos {
     public String nome;
     public double valor;
+
 
     public void ler() {
         Scanner l = new Scanner(System.in);
@@ -56,10 +58,10 @@ public class Gastos {
             System.out.println("Abrindo Conexão... ");
             String removeGasto;
 
-            System.out.print("Digite o id dos Gastos para efetuar a Exclusão:  ");
+            System.out.print("Digite o nome dos Gastos para efetuar a Exclusão:  ");
             removeGasto = tc.next();
 
-            String sql = "DELETE FROM gastos where idgasto = '" + removeGasto + "'";
+            String sql = "DELETE FROM gastos where nome = '" + removeGasto + "'";
 
             PreparedStatement comando = conexao.prepareStatement(sql);
 
@@ -76,7 +78,7 @@ public class Gastos {
 
     public void pesquisaGastos() throws SQLException {
         Connection conexao = ConnectionFactory.createConnection();
-        String sql = "SELECT * FROM gastos";
+        String sql = "select * from pesquisa";
         PreparedStatement comando = conexao.prepareStatement(sql);
 
         ResultSet result = comando.executeQuery(sql);
@@ -86,11 +88,13 @@ public class Gastos {
             Gastos gastos = new Gastos();
 
             System.out.println(" ---------RESULTADO------------- ");
-            System.out.println("ID GASTO = " + result.getInt(1));
-            System.out.println("ID USUARIO = " + result.getInt(4));
-            System.out.println("NOME GASTO = " + result.getString(2));
-            System.out.println("VALOR GASTO = " + result.getInt(3));
+            System.out.println("NOME EMPRESA = " + result.getString(3));
+            System.out.println("ID USUARIO = " + result.getInt(1));
+            System.out.println("NOME USUARIO = " + result.getString(2));
+            System.out.println("NOME GASTO = " + result.getString(4));
+            System.out.println("VALOR GASTO = " + result.getDouble(5));
             System.out.println(" -------------------------------- ");
         }
     }
+
 }

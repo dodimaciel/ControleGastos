@@ -94,7 +94,7 @@ public class Main {
 
                     System.out.println(" ** 1 - Adicionar Gasto ** ");
                     System.out.println(" ** 2 - Exibir Gasto ** ");
-                    System.out.println(" ** 3 - Remover Gasto por ID");
+                    System.out.println(" ** 3 - Remover Gasto por nome **");
                     System.out.println(" ** 4 - Voltar para o meu principal ** ");
                     op = l.nextInt();
 
